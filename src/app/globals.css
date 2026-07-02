@@ -1,3 +1,41 @@
+/* Charte graphique Asterion Ventures — tokens repris du site asterionventures.com */
+
+@font-face {
+  font-family: "PP Pangram Sans";
+  src: url("/fonts/PPPangramSans-CompressedExtrabold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --asterion-black: #111113;
+  --asterion-cream: #f0ede6;
+  --asterion-cream-2: #e4e0d8;
+  --asterion-white: #fff;
+  --asterion-orange: #d4521e;
+  --asterion-navy: #131b4a;
+  --text-muted: #55524c;
+  --font-display: "PP Pangram Sans", Arial Black, sans-serif;
+  --font-body: "PP Neue Montreal", Arial, Helvetica, sans-serif;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,67 +43,78 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f7f7f9;
-  color: #111;
+  font-family: var(--font-body);
+  font-weight: 400;
+  background: var(--asterion-cream);
+  color: var(--asterion-black);
   line-height: 1.5;
 }
 
 .container {
   max-width: 640px;
   margin: 0 auto;
-  padding: 32px 16px 64px;
+  padding: 40px 20px 72px;
+}
+
+h1 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  line-height: 0.9;
+  font-size: clamp(34px, 6vw, 48px);
 }
 
 .intro-text {
   font-size: 15px;
-  color: #333;
-  margin: 8px 0 24px;
-}
-
-h1 {
-  font-size: 22px;
+  color: var(--text-muted);
+  margin: 16px 0 28px;
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 8px;
-  padding: 16px;
+  background: var(--asterion-white);
+  border: 1px solid var(--asterion-cream-2);
+  padding: 20px;
   margin-bottom: 14px;
 }
 
 .card-contact {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .badge {
-  background: #eef2ff;
-  color: #3730a3;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: normal;
-  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--asterion-orange);
+  border: 1px solid var(--asterion-orange);
+  padding: 3px 8px;
   white-space: nowrap;
 }
 
 .card-context {
   font-size: 13px;
-  color: #666;
-  margin-top: 4px;
+  color: var(--text-muted);
+  margin-top: 6px;
 }
 
 .question {
-  margin-top: 14px;
+  margin-top: 18px;
 }
 
 .question-label {
   display: block;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .choices {
@@ -75,34 +124,47 @@ h1 {
 }
 
 .choice {
-  border: 1px solid #d4d4d8;
-  background: #fff;
-  border-radius: 6px;
-  padding: 7px 12px;
-  font-size: 13px;
+  font-family: var(--font-body);
+  border: 1px solid var(--asterion-black);
+  background: transparent;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  color: #333;
+  color: var(--asterion-black);
+  transition: background 0.2s, color 0.2s;
+}
+
+.choice:hover {
+  background: var(--asterion-cream-2);
 }
 
 .choice.selected {
-  background: #4338ca;
-  border-color: #4338ca;
-  color: #fff;
+  background: var(--asterion-black);
+  border-color: var(--asterion-black);
+  color: var(--asterion-white);
 }
 
 textarea,
 input[type="date"] {
   width: 100%;
-  border: 1px solid #d4d4d8;
-  border-radius: 6px;
-  padding: 8px 10px;
+  border: 1px solid var(--asterion-black);
+  border-radius: 0;
+  padding: 9px 12px;
   font-size: 14px;
-  font-family: inherit;
-  background: #fff;
+  font-family: var(--font-body);
+  background: var(--asterion-white);
+  color: var(--asterion-black);
+}
+
+textarea:focus,
+input[type="date"]:focus {
+  outline: 2px solid var(--asterion-orange);
+  outline-offset: -1px;
 }
 
 textarea {
-  min-height: 72px;
+  min-height: 76px;
   resize: vertical;
 }
 
@@ -116,51 +178,62 @@ textarea {
   cursor: pointer;
   background: none;
   border: none;
-  color: #d4d4d8;
+  color: var(--asterion-cream-2);
   padding: 0 2px;
 }
 
 .star.filled {
-  color: #f5b301;
+  color: var(--asterion-orange);
 }
 
 .submit-btn {
+  font-family: var(--font-body);
   display: block;
   width: 100%;
-  margin-top: 20px;
-  background: #4338ca;
-  color: #fff;
+  margin-top: 24px;
+  background: var(--asterion-orange);
+  color: var(--asterion-white);
   border: none;
-  border-radius: 6px;
-  padding: 13px;
+  border-radius: 0;
+  padding: 14px;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
 }
 
 .submit-btn:disabled {
-  background: #a5a1e8;
+  opacity: 0.5;
   cursor: default;
 }
 
 .error-text {
-  color: #b91c1c;
+  color: var(--asterion-orange);
   font-size: 13px;
+  font-weight: 500;
   margin-top: 10px;
 }
 
 .center-box {
   text-align: center;
-  padding: 64px 16px;
+  padding: 72px 20px;
 }
 
 .center-box .emoji {
   font-size: 42px;
+  margin-bottom: 16px;
 }
 
 .footer-note {
   text-align: center;
   font-size: 12px;
-  color: #999;
-  margin-top: 32px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 40px;
 }
