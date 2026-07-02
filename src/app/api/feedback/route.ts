@@ -156,8 +156,8 @@ export async function POST(request: NextRequest) {
         ) {
           row[REPONSE.statutPrestation] = input.statutPrestation;
         }
+        // Note du RDV : demandée pour tous les types quand le RDV a eu lieu.
         if (
-          intro.type === "Pro bono" &&
           typeof input.note === "number" &&
           Number.isInteger(input.note) &&
           input.note >= 1 &&

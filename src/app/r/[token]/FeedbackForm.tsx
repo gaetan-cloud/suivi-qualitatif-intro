@@ -151,9 +151,11 @@ function IntroCard({
         </div>
       )}
 
-      {answer.rdv === "Oui" && intro.type === "Pro bono" && (
+      {answer.rdv === "Oui" && (
         <div className="question">
-          <label className="question-label">Note du RDV (sur 5)</label>
+          <label className="question-label">
+            Quelle note mettrais-tu à ce rendez-vous ? *
+          </label>
           <div className="stars">
             {[1, 2, 3, 4, 5].map((n) => (
               <button
@@ -167,6 +169,9 @@ function IntroCard({
               </button>
             ))}
           </div>
+          {missing && !answer.note && (
+            <div className="error-text">Merci de donner une note.</div>
+          )}
         </div>
       )}
 
@@ -217,8 +222,12 @@ export default function FeedbackForm({ token }: { token: string }) {
       .catch(() => setStatus("error"));
   }, [token]);
 
+  function isIncomplete(a: Answer | undefined): boolean {
+    return !a?.rdv || (a.rdv === "Oui" && !a.note);
+  }
+
   async function submit() {
-    if (intros.some((i) => !answers[i.id]?.rdv)) {
+    if (intros.some((i) => isIncomplete(answers[i.id]))) {
       setShowMissing(true);
       return;
     }
@@ -334,10 +343,9 @@ export default function FeedbackForm({ token }: { token: string }) {
         {submitting ? "Envoi en cours…" : "Envoyer mes retours"}
       </button>
       {submitError && <div className="error-text">{submitError}</div>}
-      {showMissing && intros.some((i) => !answers[i.id]?.rdv) && (
+      {showMissing && intros.some((i) => isIncomplete(answers[i.id])) && (
         <div className="error-text">
-          Il manque une réponse à « Le rendez-vous a-t-il eu lieu ? » sur au
-          moins une carte.
+          Il manque une réponse obligatoire sur au moins une carte.
         </div>
       )}
 
