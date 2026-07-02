@@ -49,6 +49,18 @@ Déjà configurées : `AIRTABLE_BASE_ID`, `AIRTABLE_TABLE_INTROS`,
 2. `printf 'pat_xxx' | npx vercel env add AIRTABLE_API_KEY production` (depuis ce dossier), ou via le dashboard Vercel → Settings → Environment Variables.
 3. Redéployer : `npx vercel deploy --prod --yes`.
 
+## ⚠️ Automation Airtable héritée (à scoper avant le go-live)
+
+L'automation Airtable « à la création d'une ligne Réponses » (ère Fillout) écrase
+les statuts posés par l'app quelques secondes plus tard, avec une logique qui ne
+reconnaît plus les libellés actuels (ex. « Opportunité en cours » → elle met
+`Répondu` au lieu de `Résultat en attente`). Vérifié le 02/07/2026 par sonde.
+
+**Fix (1 min, UI Airtable → Automations)** : ajouter une condition à cette
+automation pour qu'elle ne traite que les lignes dont **« Intro liée » est vide**
+(les lignes Fillout — l'app remplit toujours ce champ à la création). Une fois
+Fillout décommissionné, supprimer l'automation.
+
 ## Test de bout en bout
 
 Trois intros de test (`Gaëtan (test)`, gaetan@asterionventures.com) sont en
