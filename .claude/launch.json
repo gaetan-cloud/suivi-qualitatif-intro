@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "retours-intros-mock",
+      "runtimeExecutable": "env",
+      "runtimeArgs": ["MOCK_AIRTABLE=1", "npx", "next", "dev", "-p", "3457"],
+      "port": 3457
+    }
+  ]
+}
